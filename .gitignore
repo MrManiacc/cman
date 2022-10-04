@@ -1,0 +1,7 @@
+.idea/
+Cman/Lang/*.cs
+Cman/Lang/*.tokens
+Cman/Lang/*.interp
+Cman/bin/
+Cman/obj/
+packages/
