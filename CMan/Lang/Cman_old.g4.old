@@ -57,10 +57,8 @@ expression: owner=expression DOT functionName ows call #FuncCallExpr
           | owner=expression DOT variableReference #VarRefExpr
           | variableReference ows call #InvokerExpr
           | superCall=SUPER_LABLE ows (DOT ows functionName ows)? call #SuperCallExpr
-          | newCall = DOLLAR ows className ows call #CtorCallExpr
           | value #ValueExpr
           | listLiteral #ListExpr
-          | spreadExpression #SpreadExpr
           | OPEN_PAREN ows expression ows MULTIPLY ows expression ows CLOSE_PAREN #MultiplyExpr
           | expression ows MULTIPLY ows expression #MultiplyExpr
           | OPEN_PAREN ows expression ows DIVIDE ows expression ows CLOSE_PAREN #DivideExpr
