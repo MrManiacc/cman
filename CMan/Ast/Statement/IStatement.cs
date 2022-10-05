@@ -1,4 +1,4 @@
-﻿namespace CMan.Ast
+﻿namespace CMan.Ast.Statement
 {
     public interface IStatement
     {

@@ -1,6 +1,7 @@
-﻿using CMan.Ast.Type;
+﻿using CMan.Ast.Statement;
+using CMan.Ast.Type;
 
-namespace CMan.Ast
+namespace CMan.Ast.Expression
 {
     /// <summary>
     /// The base level for any expression. Defines a type at the most basic level
