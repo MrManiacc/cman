@@ -43,10 +43,11 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Lang\CmanBaseVisitor.cs" />
-        <Compile Include="Lang\CmanLexer.cs" />
-        <Compile Include="Lang\CmanParser.cs" />
-        <Compile Include="Lang\CmanVisitor.cs" />
+        <Compile Include="Ast\IExpression.cs" />
+        <Compile Include="Ast\IStatement.cs" />
+        <Compile Include="Ast\Type\ClassType.cs" />
+        <Compile Include="Ast\Type\SystemType.cs" />
+        <Compile Include="Ast\Type\IType.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
@@ -54,12 +55,13 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include=".gitignore" />
-      <Content Include="Lang\Cman.g4" />
-      <Content Include="readme.md" />
+      <Content Include="Lang\CmanLexer.g4" />
+      <Content Include="Lang\CmanParser.g4" />
+      <Content Include="Lang\Cman_old.g4.old" />
+      <Content Include="Lang\Test.cman" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Ast" />
+      <Folder Include="Visitors" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,0 +1,21 @@
+﻿//Declare an explicitly typed string array 
+let test: string[] = {"Test1", "Test2", "Test3"}
+
+//Declare an implicitly typed string array that used a spread expression to "insert" the test array
+let test2 = {"Test0", ...test, "Test4"}
+
+//Doesn't actually exist but proves the point that we should be able to use the spread syntax to create new things
+assertEquals(test, test2)
+
+/**
+ * Assert equals should test the equality between things
+ */
+fn assertEquals(var1: any, var2: any) { 
+    let type1 = typeof(var1)
+    let type2 = typeof(var2)
+    if (type1 != type2) error("Assertion failed for equality between '$type1.typeName' and '$type2.typeName'.")
+}
+
+for(let i = 0, i < sizeof(test), i++){
+    println(test[i])
+}
