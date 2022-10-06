@@ -69,10 +69,18 @@ MULTIPLY: '*';
 DIVIDE: '/';
 MODULUS: '%';
 
+BYTE_VALUE: WHOLE_NUMBER 'b';
+SHORT_VALUE: WHOLE_NUMBER 's';
+LONG_VALUE: WHOLE_NUMBER 'l';
+INT_VALUE: (WHOLE_NUMBER  'i'? | HEX_NUMBER );
+DOUBLE_VALUE: DECIMAL_NUMBER 'd';
+FLOAT_VALUE: DECIMAL_NUMBER 'f'?;
+
 //=============== Captured values ===========================
 BOOL: ('true' | 'false');
 ID: (LOWERCASE | UPPERCASE) (LOWERCASE | UPPERCASE | '_' | DIGIT)*;
-DECIMAL_NUMBER: '-'? DIGIT* ('.' DIGIT*);
+CHAR: '\'' ( '\\' ~[\r\n] | ~[\\'\r\n] ) '\'';
 STRING : '"'~('"')*'"' ;
+HEX_NUMBER: '0x' [a-fA-F0-9]+;
 WHOLE_NUMBER: '-'? DIGIT+;
-NUMBER: DIGIT | WHOLE_NUMBER;
+DECIMAL_NUMBER: '-'? DIGIT* ('.' DIGIT*);

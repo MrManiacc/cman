@@ -43,22 +43,36 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Ast\Expression\IExpression.cs" />
-        <Compile Include="Ast\Expression\NoOpExpression.cs" />
-        <Compile Include="Ast\Expression\ValueExpression.cs" />
-        <Compile Include="Ast\Statement\AssignmentStatement.cs" />
-        <Compile Include="Ast\Statement\BlockStatement.cs" />
-        <Compile Include="Ast\Statement\IfStatement.cs" />
-        <Compile Include="Ast\Statement\IStatement.cs" />
-        <Compile Include="Ast\Statement\ReturnStatement.cs" />
-        <Compile Include="Ast\Statement\VariableStatement.cs" />
-        <Compile Include="Ast\Type\ClassType.cs" />
-        <Compile Include="Ast\Type\SystemType.cs" />
-        <Compile Include="Ast\Type\IType.cs" />
         <Compile Include="Lang\CmanLexer.cs" />
         <Compile Include="Lang\CmanParser.cs" />
         <Compile Include="Lang\CmanParserBaseVisitor.cs" />
         <Compile Include="Lang\CmanParserVisitor.cs" />
+        <Compile Include="Lang\Expression\ExpressionVisitor.cs" />
+        <Compile Include="Lang\Expression\IExpression.cs" />
+        <Compile Include="Lang\Expression\Literal\LiteralAst.cs" />
+        <Compile Include="Lang\Expression\Literal\LiteralVisitor.cs" />
+        <Compile Include="Lang\Expression\NoOp\NoOpAst.cs" />
+        <Compile Include="Lang\Expression\ValueList\ValueListAst.cs" />
+        <Compile Include="Lang\Expression\ValueList\ValueListVisitor.cs" />
+        <Compile Include="Lang\Function\FunctionAst.cs" />
+        <Compile Include="Lang\Function\FunctionVisitor.cs" />
+        <Compile Include="Lang\Program\ProgramAst.cs" />
+        <Compile Include="Lang\Program\ProgramVisitor.cs" />
+        <Compile Include="Lang\Scope\IScope.cs" />
+        <Compile Include="Lang\Statement\Assignment\AssignmentAst.cs" />
+        <Compile Include="Lang\Statement\Assignment\AssignmentVisitor.cs" />
+        <Compile Include="Lang\Statement\Block\BlockAst.cs" />
+        <Compile Include="Lang\Statement\Block\BlockVisitor.cs" />
+        <Compile Include="Lang\Statement\If\IfAst.cs" />
+        <Compile Include="Lang\Statement\IStatement.cs" />
+        <Compile Include="Lang\Statement\Return\ReturnAst.cs" />
+        <Compile Include="Lang\Statement\Return\ReturnVisitor.cs" />
+        <Compile Include="Lang\Statement\StatementVisitor.cs" />
+        <Compile Include="Lang\Statement\Variable\VariableAst.cs" />
+        <Compile Include="Lang\Statement\Variable\VariableVisitor.cs" />
+        <Compile Include="Lang\Type\UserType.cs" />
+        <Compile Include="Lang\Type\IType.cs" />
+        <Compile Include="Lang\Type\SystemType.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
@@ -68,11 +82,7 @@
     <ItemGroup>
       <Content Include="Lang\CmanLexer.g4" />
       <Content Include="Lang\CmanParser.g4" />
-      <Content Include="Lang\Cman_old.g4.old" />
       <Content Include="Lang\Test.cman" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Visitors" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

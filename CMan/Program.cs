@@ -1,12 +1,35 @@
 ﻿using System;
+using System.Linq;
+using Antlr4.Runtime;
+using CMan.Lang.Program;
+using CMan.Lang.Statement.Variable;
 
-namespace CMan
-{
-    internal class Program
-    {
-        public static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, world!");
+namespace CMan {
+    internal static class Program {
+        private const string Script = @"
+            let test1 = 5
+            let test2 = 5.5d
+        ";
+
+        public static void Main(string[] args) {
+            var parser = Setup(Script);
+            var program = BuildAst(parser);
+            var variables = program.Statements.OfType<VariableAst>();
+            foreach (var variable in variables) {
+                Console.WriteLine(variable);
+            }
+        }
+
+        private static CmanParser Setup(string input) {
+            var inputStream = new AntlrInputStream(Script);
+            var lexer = new CmanLexer(inputStream);
+            var tokenStream = new CommonTokenStream(lexer);
+            return new CmanParser(tokenStream);
+        }
+
+        private static ProgramAst BuildAst(CmanParser parser) {
+            var visitor = new ProgramVisitor();
+            return parser.program().Accept(visitor);
         }
     }
 }

@@ -16,6 +16,6 @@ fn assertEquals(var1: any, var2: any) {
     if (type1 != type2) error("Assertion failed for equality between '$type1.typeName' and '$type2.typeName'.")
 }
 
-for(let i = 0, i < sizeof(test), i++){
+for(let i = 0l, i < sizeof(test), i++){
     println(test[i])
 }

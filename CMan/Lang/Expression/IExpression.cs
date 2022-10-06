@@ -1,7 +1,7 @@
-﻿using CMan.Ast.Statement;
-using CMan.Ast.Type;
+﻿using CMan.Lang.Statement;
+using CMan.Lang.Type;
 
-namespace CMan.Ast.Expression
+namespace CMan.Lang.Expression
 {
     /// <summary>
     /// The base level for any expression. Defines a type at the most basic level

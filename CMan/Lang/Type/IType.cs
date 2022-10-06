@@ -1,4 +1,4 @@
-﻿namespace CMan.Ast.Type
+﻿namespace CMan.Lang.Type
 {
     public interface IType
     {
@@ -6,5 +6,6 @@
         /// The raw name of this type. I.E: string, int, etc.
         /// </summary>
         string GetTypeName();
+        
     }
 }

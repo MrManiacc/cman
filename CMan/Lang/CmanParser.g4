@@ -19,7 +19,7 @@ explicitTypeSignature: COLON type; // This is used for declaring exactly what yo
 
 //=========== Statements ===============
 statement: block #BlockStmt
-         | variable #VarDeclartionStmt
+         | variable #VarDeclarationStmt
          | expression assignment #AssignmentStmt
          | for #ForStmt
          | return #returnStmt
@@ -74,12 +74,21 @@ argumentList : argument? (COMMA  argument)*;
 argument : expression;
 
 //=============== Values ==============================
-value: WHOLE_NUMBER #IntegerValue
-     | DECIMAL_NUMBER #DecimalValue
+value: number #NumberValue
      | BOOL #BoolValue
+     | CHAR #CharValue
      | STRING #StringValue
      | NULL_LABEL #NullValue; //TODO maybe remove null
-    
+
+//defines all of our raw captured number values
+number: BYTE_VALUE #ByteValue 
+      | SHORT_VALUE #ShortValue
+      | INT_VALUE  #IntValue
+      | LONG_VALUE #LongValue
+      | DOUBLE_VALUE #LongValue
+      | FLOAT_VALUE #FloatVla
+; 
+
 //=============== Types ==============================
 type : primitives #PrimativeType
   | qualifiedName #ClassType

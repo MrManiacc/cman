@@ -4,4 +4,4 @@ Cman/Lang/*.tokens
 Cman/Lang/*.interp
 Cman/bin/
 Cman/obj/
-packages/
+*.java
