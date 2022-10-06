@@ -1,6 +1,8 @@
 ﻿using CMan.Lang.Expression;
 using CMan.Lang.Statement.Assignment;
 using CMan.Lang.Statement.Block;
+using CMan.Lang.Statement.For;
+using CMan.Lang.Statement.If;
 using CMan.Lang.Statement.Return;
 using CMan.Lang.Statement.Variable;
 
@@ -11,6 +13,8 @@ namespace CMan.Lang.Statement {
         private readonly VariableVisitor variableVisitor;
         private readonly BlockVisitor blockVisitor;
         private readonly ReturnVisitor returnVisitor;
+        private readonly IfVisitor ifVisitor;
+        private readonly ForVisitor forVisitor;
 
         public StatementVisitor() {
             expressionVisitor = new ExpressionVisitor();
@@ -18,7 +22,14 @@ namespace CMan.Lang.Statement {
             variableVisitor = new VariableVisitor(expressionVisitor);
             blockVisitor = new BlockVisitor(this);
             returnVisitor = new ReturnVisitor(expressionVisitor);
+            ifVisitor = new IfVisitor(this);
+            forVisitor = new ForVisitor(this);
         }
+
+        public override IStatement VisitIfStmt(CmanParser.IfStmtContext context) => context.Accept(ifVisitor);
+
+        public override IStatement VisitValueListExpr(CmanParser.ValueListExprContext context) =>
+            context.Accept(expressionVisitor);
 
         public override IStatement VisitLiteralExpr(CmanParser.LiteralExprContext context) =>
             context.Accept(expressionVisitor);
@@ -26,7 +37,10 @@ namespace CMan.Lang.Statement {
         public override IStatement VisitAssignmentStmt(CmanParser.AssignmentStmtContext context) =>
             context.Accept(assignmentVisitor);
 
-        public override IStatement VisitVarDeclarationStmt(CmanParser.VarDeclartionStmtContext context) =>
+        public override IStatement VisitVarDeclarationStmt(CmanParser.VarDeclarationStmtContext context) =>
+            context.Accept(variableVisitor);
+
+        public override IStatement VisitVariable(CmanParser.VariableContext context) =>
             context.Accept(variableVisitor);
 
         public override IStatement VisitBlockStmt(CmanParser.BlockStmtContext context) =>
@@ -34,5 +48,8 @@ namespace CMan.Lang.Statement {
 
         public override IStatement VisitReturnStmt(CmanParser.ReturnStmtContext context) =>
             context.Accept(returnVisitor);
+
+        public override IStatement VisitForStmt(CmanParser.ForStmtContext context) =>
+            context.Accept(forVisitor);
     }
 }

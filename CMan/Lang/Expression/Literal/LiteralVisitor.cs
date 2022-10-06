@@ -1,12 +1,18 @@
 ﻿using System.Linq;
 using CMan.Lang.Type;
 
-namespace CMan.Lang.Expression.Literal {
-    public class LiteralVisitor : CmanParserBaseVisitor<LiteralAst> {
-        public override LiteralAst VisitLiteralExpr(CmanParser.LiteralExprContext context) {
+namespace CMan.Lang.Expression.Literal
+{
+    public class LiteralVisitor : CmanParserBaseVisitor<LiteralAst>
+    {
+        public override LiteralAst VisitLiteralExpr(CmanParser.LiteralExprContext context)
+        {
             var value = context.value().GetText();
             var type = ResolveType(value);
-            if (!value.StartsWith("0x") && !char.IsDigit(value.Last())) value = value.Substring(0, value.Length - 1);
+            if (Equals(type, SystemType.Char) || Equals(type, SystemType.String))
+                value = value.Substring(1, value.Length - 2);
+            else if (!value.StartsWith("0x") && !char.IsDigit(value.Last()) && !Equals(type, SystemType.Boolean))
+                value = value.Substring(0, value.Length - 1);
             return new LiteralAst(type, value);
         }
 
@@ -15,12 +21,14 @@ namespace CMan.Lang.Expression.Literal {
         /// </summary>
         /// <param name="value"></param>
         /// <returns>The resolved primitive type</returns>
-        private static IType ResolveType(string value) {
+        private static IType ResolveType(string value)
+        {
             var array = value.ToCharArray();
             if (array.Length == 0) return SystemType.Void;
             if (value.StartsWith("'") && value.EndsWith("'")) return SystemType.Char;
             if (value.StartsWith("\"") && value.EndsWith("\"")) return SystemType.String;
-            switch (value) {
+            switch (value)
+            {
                 case "true":
                 case "false":
                     return SystemType.Boolean;
@@ -32,7 +40,8 @@ namespace CMan.Lang.Expression.Literal {
             var isDecimal = isNumber && value.Contains(".");
             var isHex = value.StartsWith("0x");
             if (isHex) return SystemType.Int;
-            switch (isDecimal) {
+            switch (isDecimal)
+            {
                 case true when value.EndsWith("d"): return SystemType.Double;
                 case true: return SystemType.Float;
             }

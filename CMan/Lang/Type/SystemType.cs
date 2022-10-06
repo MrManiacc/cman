@@ -19,7 +19,7 @@ namespace CMan.Lang.Type {
         }
 
         public override string ToString() {
-            return $"{nameof(name)}: {name}";
+            return $"{name}";
         }
 
         public override int GetHashCode() {

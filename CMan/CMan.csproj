@@ -59,11 +59,15 @@
         <Compile Include="Lang\Program\ProgramAst.cs" />
         <Compile Include="Lang\Program\ProgramVisitor.cs" />
         <Compile Include="Lang\Scope\IScope.cs" />
+        <Compile Include="Lang\Scope\ISymbol.cs" />
         <Compile Include="Lang\Statement\Assignment\AssignmentAst.cs" />
         <Compile Include="Lang\Statement\Assignment\AssignmentVisitor.cs" />
         <Compile Include="Lang\Statement\Block\BlockAst.cs" />
         <Compile Include="Lang\Statement\Block\BlockVisitor.cs" />
+        <Compile Include="Lang\Statement\For\ForAst.cs" />
+        <Compile Include="Lang\Statement\For\ForVisitor.cs" />
         <Compile Include="Lang\Statement\If\IfAst.cs" />
+        <Compile Include="Lang\Statement\If\IfVisitor.cs" />
         <Compile Include="Lang\Statement\IStatement.cs" />
         <Compile Include="Lang\Statement\Return\ReturnAst.cs" />
         <Compile Include="Lang\Statement\Return\ReturnVisitor.cs" />
@@ -83,6 +87,9 @@
       <Content Include="Lang\CmanLexer.g4" />
       <Content Include="Lang\CmanParser.g4" />
       <Content Include="Lang\Test.cman" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Lang\Expression\Reference" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -5,7 +5,7 @@ namespace CMan.Lang.Expression {
     public class ExpressionVisitor : CmanParserBaseVisitor<IExpression> {
         private readonly LiteralVisitor literalVisitor;
         private readonly ValueListVisitor valueListVisitor;
-
+    
         public ExpressionVisitor() {
             literalVisitor = new LiteralVisitor();
             valueListVisitor = new ValueListVisitor(this);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CMan.Lang.Type;
 
 namespace CMan.Lang.Expression.ValueList {
@@ -16,7 +17,7 @@ namespace CMan.Lang.Expression.ValueList {
         public new IType GetType() => type;
 
         public override string ToString() {
-            return $"{nameof(type)}: {type}, {nameof(Values)}: {Values}";
+            return $"{nameof(type)}: {type}, {nameof(Values)}: {string.Join(", ", Values)}";
         }
     }
 }

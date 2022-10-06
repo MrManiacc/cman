@@ -5,20 +5,20 @@ using CMan.Lang.Type;
 
 namespace CMan.Lang.Statement.Variable {
     internal class VariableVisitor : CmanParserBaseVisitor<VariableAst> {
-        private ExpressionVisitor expressionVisitor;
+        private readonly ExpressionVisitor expressionVisitor;
 
         public VariableVisitor(ExpressionVisitor expressionVisitor) {
             this.expressionVisitor = expressionVisitor;
         }
 
-        public override VariableAst VisitVarDeclarationStmt(CmanParser.VarDeclartionStmtContext context) {
-            var variable = context.variable();
-            var name = variable.name().GetText();
-            var declaration = variable.variableDeclartion();
+        public override VariableAst VisitVariable(CmanParser.VariableContext context) {
+            var name = context.name().GetText();
+            var declaration = context.variableDeclartion();
             var child = declaration.GetChild(0);
             IExpression expr = new NoOpExpression();
             IType type = SystemType.Null;
-            switch (child) {
+            switch (child)
+            {
                 case CmanParser.AssignmentContext ass:
                     expr = ass.expression().Accept(expressionVisitor);
                     type = expr.GetType();
@@ -37,5 +37,8 @@ namespace CMan.Lang.Statement.Variable {
 
             return new VariableAst(name, type, expr);
         }
+
+        public override VariableAst VisitVarDeclarationStmt(CmanParser.VarDeclarationStmtContext context) =>
+            VisitVariable(context.variable());
     }
 }

@@ -2,19 +2,22 @@
 using System.Linq;
 using Antlr4.Runtime;
 using CMan.Lang.Program;
+using CMan.Lang.Statement.Assignment;
 using CMan.Lang.Statement.Variable;
 
 namespace CMan {
     internal static class Program {
         private const string Script = @"
-            let test1 = 5
-            let test2 = 5.5d
+            let test1 = true
+            let test2 = {5, 2, 3}
+            
+            test2 = {4, 2, 3}
         ";
-
+        
         public static void Main(string[] args) {
             var parser = Setup(Script);
             var program = BuildAst(parser);
-            var variables = program.Statements.OfType<VariableAst>();
+            var variables = program.Statements.OfType<AssignmentAst>();
             foreach (var variable in variables) {
                 Console.WriteLine(variable);
             }
