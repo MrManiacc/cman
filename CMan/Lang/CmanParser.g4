@@ -44,8 +44,8 @@ expression: owner=expression DOT functionName call #FunctionCallExpr
           | value #LiteralExpr
           | OPEN_PAREN left=expression binaryOperator right=expression CLOSE_PAREN #BinaryExpr
           | left=expression binaryOperator right=expression #BinaryExpr
-          | OPEN_PAREN left=expression condtionalOperator right=expression CLOSE_PAREN #Condtionalxpr
-          | left=expression condtionalOperator right=expression #Condtionalxpr
+          | OPEN_PAREN left=expression condtionalOperator right=expression CLOSE_PAREN #ConditionalExpr
+          | left=expression condtionalOperator right=expression #ConditionalExpr
           | OPEN_PAREN operator=urnaryOperator expression CLOSE_PAREN #UnaryExpr
           | operator=urnaryOperator expression #UnaryExpr
           | OPEN_PAREN expression operator=urnaryOperator CLOSE_PAREN #UnaryExpr

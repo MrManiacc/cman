@@ -8,10 +8,9 @@ using CMan.Lang.Statement.Variable;
 namespace CMan {
     internal static class Program {
         private const string Script = @"
-            let test1 = true
-            let test2 = {5, 2, 3}
-            
-            test2 = {4, 2, 3}
+            let threshold = 69
+            if(70 > 50)
+                threshold = 5
         ";
         
         public static void Main(string[] args) {

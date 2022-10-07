@@ -23,11 +23,18 @@ namespace CMan.Lang.Type {
         }
 
         public override int GetHashCode() {
-            return name.GetHashCode();
+            return (name != null ? name.GetHashCode() : 0);
         }
 
         public override bool Equals(object obj) {
-            return obj is SystemType type && type.GetTypeName().Equals(GetTypeName());
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.GetType() == this.GetType()
+                   && Equals((SystemType)obj);
+        }
+
+        protected bool Equals(SystemType other) {
+            return name == other.name;
         }
 
         //======================== Built in types ===========================

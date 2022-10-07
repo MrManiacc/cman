@@ -49,6 +49,10 @@
         <Compile Include="Lang\CmanParserVisitor.cs" />
         <Compile Include="Lang\Expression\Binary\BinaryAst.cs" />
         <Compile Include="Lang\Expression\Binary\BinaryOp.cs" />
+        <Compile Include="Lang\Expression\Binary\BinaryVisitor.cs" />
+        <Compile Include="Lang\Expression\Conditional\ConditionalAst.cs" />
+        <Compile Include="Lang\Expression\Conditional\ConditionalOp.cs" />
+        <Compile Include="Lang\Expression\Conditional\ConditionalVisitor.cs" />
         <Compile Include="Lang\Expression\ExpressionVisitor.cs" />
         <Compile Include="Lang\Expression\IExpression.cs" />
         <Compile Include="Lang\Expression\Literal\LiteralAst.cs" />
