@@ -63,9 +63,9 @@ binaryOperator: MULTIPLY        #MultiplyOp
               | MODULUS         #ModulusOp
 ;
 condtionalOperator: GREATER_THAN | LESS_THAN | EQUAL_TO | NOT_EQUAL_TO | GREATER_THAN_OR_EQUAL |  LESS_THAN_OR_EQUAL | AND | OR;
-urnaryOperator: PLUS PLUS #IncrementOp 
-              | MINUS MINUS #DecrementOp
-              | NOT #NotOp;
+urnaryOperator: (PLUS PLUS) 
+              | (MINUS MINUS)
+              | NOT;
 
 expressionList : expression (COMMA  expression)*;
 

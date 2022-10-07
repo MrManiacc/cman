@@ -15,7 +15,7 @@ namespace CMan.Lang.Statement {
         private readonly ReturnVisitor returnVisitor;
         private readonly IfVisitor ifVisitor;
         private readonly ForVisitor forVisitor;
-        
+
         public StatementVisitor() {
             expressionVisitor = new ExpressionVisitor();
             assignmentVisitor = new AssignmentVisitor(expressionVisitor);
@@ -26,6 +26,9 @@ namespace CMan.Lang.Statement {
             forVisitor = new ForVisitor(this);
         }
 
+        public override IStatement VisitUnaryExpr(CmanParser.UnaryExprContext context) =>
+            context.Accept(expressionVisitor);
+
         public override IStatement VisitConditionalExpr(CmanParser.ConditionalExprContext context) =>
             context.Accept(expressionVisitor);
 
@@ -34,6 +37,7 @@ namespace CMan.Lang.Statement {
 
         public override IStatement VisitLiteralExpr(CmanParser.LiteralExprContext context) =>
             context.Accept(expressionVisitor);
+
         public override IStatement VisitBinaryExpr(CmanParser.BinaryExprContext context) =>
             context.Accept(expressionVisitor);
 

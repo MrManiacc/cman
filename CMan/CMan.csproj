@@ -58,6 +58,9 @@
         <Compile Include="Lang\Expression\Literal\LiteralAst.cs" />
         <Compile Include="Lang\Expression\Literal\LiteralVisitor.cs" />
         <Compile Include="Lang\Expression\NoOp\NoOpAst.cs" />
+        <Compile Include="Lang\Expression\Unary\UnaryAst.cs" />
+        <Compile Include="Lang\Expression\Unary\UnaryOp.cs" />
+        <Compile Include="Lang\Expression\Unary\UnaryVisitor.cs" />
         <Compile Include="Lang\Expression\ValueList\ValueListAst.cs" />
         <Compile Include="Lang\Expression\ValueList\ValueListVisitor.cs" />
         <Compile Include="Lang\Function\FunctionAst.cs" />
