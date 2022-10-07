@@ -47,6 +47,8 @@
         <Compile Include="Lang\CmanParser.cs" />
         <Compile Include="Lang\CmanParserBaseVisitor.cs" />
         <Compile Include="Lang\CmanParserVisitor.cs" />
+        <Compile Include="Lang\Expression\Binary\BinaryAst.cs" />
+        <Compile Include="Lang\Expression\Binary\BinaryOp.cs" />
         <Compile Include="Lang\Expression\ExpressionVisitor.cs" />
         <Compile Include="Lang\Expression\IExpression.cs" />
         <Compile Include="Lang\Expression\Literal\LiteralAst.cs" />
@@ -87,9 +89,6 @@
       <Content Include="Lang\CmanLexer.g4" />
       <Content Include="Lang\CmanParser.g4" />
       <Content Include="Lang\Test.cman" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Lang\Expression\Reference" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

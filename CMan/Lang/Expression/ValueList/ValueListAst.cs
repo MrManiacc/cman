@@ -12,7 +12,8 @@ namespace CMan.Lang.Expression.ValueList {
             this.type = type;
         }
 
-        public ValueListAst(List<IExpression> values) : this(values, values[0].GetType()) { }
+        public ValueListAst(List<IExpression> values) : this(values, values.Count > 0 ? values[0].GetType() : SystemType.Void) { }
+        
     
         public new IType GetType() => type;
 

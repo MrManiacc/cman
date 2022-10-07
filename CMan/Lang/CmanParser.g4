@@ -21,6 +21,7 @@ explicitTypeSignature: COLON type; // This is used for declaring exactly what yo
 statement: block #BlockStmt
          | variable #VarDeclarationStmt
          | expression assignment #AssignmentStmt
+         | expression binaryAssignment #AssignmentStmt
          | for #ForStmt
          | return #returnStmt
          | if #IfStmt
@@ -30,6 +31,7 @@ if: IF_LABEL OPEN_PAREN expression CLOSE_PAREN trueStatement=statement (ELSE_LAB
 return: RETURN_LABEL expression?;
 block : OPEN_BRACKET statement* CLOSE_BRACKET;
 assignment: EQUAL expression;
+binaryAssignment: binaryOperator EQUAL expression; 
 
 //=========== Expressions ===============
 expression: owner=expression DOT functionName call #FunctionCallExpr 
@@ -50,7 +52,7 @@ expression: owner=expression DOT functionName call #FunctionCallExpr
           | expression operator=urnaryOperator #UnaryExpr
 ;
 
-call: OPEN_PAREN argumentList CLOSE_PAREN;
+call: OPEN_PAREN expressionList? CLOSE_PAREN;
 for: FOR_LABEL OPEN_PAREN variable COMMA condition=expression COMMA advancement=expression CLOSE_PAREN statement; 
 valueList : OPEN_BRACKET expression (COMMA  expression)* CLOSE_BRACKET;
 spread : DOT DOT DOT expression;
@@ -58,20 +60,14 @@ binaryOperator: MULTIPLY        #MultiplyOp
               | DIVIDE          #DivideOp
               | PLUS            #PlusOp
               | MINUS           #MinusOp
-              | MULTIPLY EQUAL  #PlusAssignOp
-              | DIVIDE EQUAL    #MinusAssignOp
-              | PLUS EQUAL      #PlusAssignOp
-              | MINUS EQUAL     #MinusAssignOp
+              | MODULUS         #ModulusOp
 ;
 condtionalOperator: GREATER_THAN | LESS_THAN | EQUAL_TO | NOT_EQUAL_TO | GREATER_THAN_OR_EQUAL |  LESS_THAN_OR_EQUAL | AND | OR;
 urnaryOperator: PLUS PLUS #IncrementOp 
               | MINUS MINUS #DecrementOp
-              | NOT #NotOp
-              ;
+              | NOT #NotOp;
 
-//=========== Arguments =================
-argumentList : argument? (COMMA  argument)*;
-argument : expression;
+expressionList : expression (COMMA  expression)*;
 
 //=============== Values ==============================
 value: number #NumberValue
@@ -87,7 +83,7 @@ number: BYTE_VALUE #ByteValue
       | LONG_VALUE #LongValue
       | DOUBLE_VALUE #LongValue
       | FLOAT_VALUE #FloatVla
-; 
+;
 
 //=============== Types ==============================
 type : primitives #PrimativeType

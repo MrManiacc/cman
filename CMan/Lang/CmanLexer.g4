@@ -37,7 +37,6 @@ NULL_LABEL: 'null';
 FOR_LABEL: 'for';
 
 //=============== Operators ===========================
-PRINT: '>>';
 OPEN_PAREN: '(';
 CLOSE_PAREN: ')';
 OPEN_SQUARE: '[';
@@ -68,6 +67,8 @@ MINUS: '-';
 MULTIPLY: '*';
 DIVIDE: '/';
 MODULUS: '%';
+SHIFT_LEFT: '<<';
+SHIFT_RIGHT: '>>';
 
 BYTE_VALUE: WHOLE_NUMBER 'b';
 SHORT_VALUE: WHOLE_NUMBER 's';
@@ -82,5 +83,5 @@ ID: (LOWERCASE | UPPERCASE) (LOWERCASE | UPPERCASE | '_' | DIGIT)*;
 CHAR: '\'' ( '\\' ~[\r\n] | ~[\\'\r\n] ) '\'';
 STRING : '"'~('"')*'"' ;
 HEX_NUMBER: '0x' [a-fA-F0-9]+;
-WHOLE_NUMBER: '-'? DIGIT+;
-DECIMAL_NUMBER: '-'? DIGIT* ('.' DIGIT*);
+WHOLE_NUMBER: DIGIT+;
+DECIMAL_NUMBER: DIGIT* ('.' DIGIT*);
