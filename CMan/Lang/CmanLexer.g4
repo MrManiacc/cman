@@ -15,7 +15,8 @@ WS : [ \t\r\n]+ -> skip ;
 
 //=============== Labels ==============================
 FUNCTION_LABEL: 'fn';
-WORKSPACE_LABEL: 'workspace';
+MODULE_LABEL: 'mod';
+USE_LABEL: 'use';
 PROJECT_LABEL: 'project';
 OVERRIDE_LABEL: 'veto';
 VARIABLE_LABEL: 'let';

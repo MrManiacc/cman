@@ -50,11 +50,21 @@ namespace CMan.Lang.Type {
         public static readonly SystemType Void = new SystemType("void");
         public static readonly SystemType Null = new SystemType("null");
 
-        public static SystemType Get(string name) {
-            foreach (var primitive in
-                     Primitives.Where(primitive => primitive.name.ToLower().Equals(name.ToLower())))
-                return primitive;
-            return Null;
+        public static SystemType GetPrimitives(string name) =>
+            Primitives.FirstOrDefault(primitive => primitive.name.ToLower().Equals(name.ToLower()));
+
+        //TODO: Look up types via scoped symbols....
+        public static IType Get(string name) {
+            var prim = GetPrimitives(name);
+            if (prim != null) return prim;
+            return new UserType(name);
+        }
+
+        //TODO: Look up types via scoped symbols....
+        public static IType Get(CmanParser.TypeContext typeContext) {
+            var prim = GetPrimitives(typeContext.GetText());
+            if (prim != null) return prim;
+            return new UserType(typeContext.GetText());
         }
     }
 }

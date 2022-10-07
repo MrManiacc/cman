@@ -1,4 +1,6 @@
-﻿namespace CMan.Lang.Scope {
+﻿using System.Collections.Generic;
+
+namespace CMan.Lang.Scope {
     public interface IScope {
         /// <summary>
         /// Scopes like a function or a class declaration will have a name to identify the
@@ -12,13 +14,13 @@
         /// return null instead of actual parent value.
         /// </summary>
         /// <returns>The enclosing scope or null</returns>
-        IScope GetParent();
+        IScope GetParentScope();
 
         /// <summary>
         /// Sets the enclosing scope of this current scope to the passed parent value
         /// </summary>
         /// <param name="parent">The enclosing scope of this scope</param>
-        void SetParent(IScope parent);
+        void SetParentScope(IScope parent);
 
         /// <summary>
         /// Define a symbol in this scope throws exception if the symbol is already declared within this scope.
@@ -30,7 +32,7 @@
         /// The order that symbols are defined must be preserved.  
         /// </summary>
         /// <param name="symbol"></param>
-        void define(ISymbol symbol);
+        void Define(ISymbol symbol);
 
         /// <summary>
         /// Look up a symbol first in this current scope with the defined name. If the symbol is not found
@@ -56,5 +58,44 @@
         /// </summary>
         /// <param name="scope">The</param>
         void Nest(IScope scope);
+        /// <summary>
+        /// This will get the outermost scope starting from the current scope by recursively
+        /// working up the tree until we can't move to the parent scope anymore.
+        /// </summary>
+        /// <returns></returns>
+        IScope GetRootScope();
+
+            /// <summary>
+        /// This will iterate through all of our nested symbols and retrieve any that extend Scoped Symbol
+        /// </summary>
+        /// <returns>All scoped symbols</returns>
+        List<IScope> GetNestedScopedSymbols();
+
+        /// <summary>
+        /// This gets all nested scopes including scoped symbols and regular scopes, which would define things
+        /// such as a local scope block.
+        /// </summary>
+        /// <returns>All nested scopes</returns>
+        List<IScope> GetNestedScopes();
+
+        /// <summary>
+        /// This will return a list of scopes that defines the path to the root scope.
+        /// The root scope will be last element while the first element will be this current scope
+        /// </summary>
+        /// <returns>The path to the root scope</returns>
+        List<IScope> GetPathToRootScope();
+
+        /// <summary>
+        /// Gets the list of symbols that are in the current scope.
+        /// </summary>
+        /// <returns></returns>
+        List<ISymbol> GetSymbols();
+
+        /// <summary>
+        /// This will get all of the symbols, including child scope's symbols as well as our
+        /// own scopes symbols.
+        /// </summary>
+        /// <returns>All downward-accessible symbols</returns>
+        List<ISymbol> GetAllSymbols();
     }
 }

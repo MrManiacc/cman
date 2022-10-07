@@ -9,17 +9,16 @@ namespace CMan {
     internal static class Program {
         private const string Script = @"
             let threshold = 69
-            if(70 > 50)
+            if(70 > 50){
                 threshold = 5
+            }        
         ";
         
         public static void Main(string[] args) {
             var parser = Setup(Script);
             var program = BuildAst(parser);
-            var variables = program.Statements.OfType<AssignmentAst>();
-            foreach (var variable in variables) {
-                Console.WriteLine(variable);
-            }
+            // var variables = program.Statements.OfType<AssignmentAst>();
+                Console.WriteLine(program);
         }
 
         private static CmanParser Setup(string input) {

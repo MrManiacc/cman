@@ -19,5 +19,10 @@ namespace CMan.Lang.Expression.Conditional {
         }
 
         public new IType GetType() => type;
+
+
+        public override string ToString() {
+            return $"Type: {type}, Left: {Left}, Op: {Op}, Right: {Right}";
+        }
     }
 }

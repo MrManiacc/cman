@@ -2,11 +2,20 @@ parser grammar CmanParser;
 
 options{ tokenVocab = CmanLexer; }
 
-program: (statement | function)* EOF;
+program: atom* EOF;
+
+//=========== Atom =================
+atom: module | function | statement;
+
+//=========== Modules =================
+module: moduleImports? moduleSignature moduleBody;
+moduleBody: OPEN_BRACKET atom* CLOSE_BRACKET;
+moduleSignature: MODULE_LABEL moduleName;
+moduleImports: USE_LABEL qualifiedName | USE_LABEL OPEN_BRACKET qualifiedName (COMMA qualifiedName)* CLOSE_BRACKET;
 
 //=========== Functions =================
 function: functionSignature statement;
-functionSignature: FUNCTION_LABEL functionName OPEN_PAREN parameterList CLOSE_PAREN returnType=explicitTypeSignature?;
+functionSignature: FUNCTION_LABEL functionName OPEN_PAREN parameterList? CLOSE_PAREN returnType=explicitTypeSignature?;
 parameterList: parameter | parameter (COMMA parameter)+;
 parameter: name explicitTypeSignature;
 
@@ -16,6 +25,9 @@ variableDeclartion: explicitTypeSignature #ExplicitSignature
                   | assignment #AssignmentSignature
                   | explicitTypeSignature assignment #ExplicitAssignmentSignature;
 explicitTypeSignature: COLON type; // This is used for declaring exactly what your type is
+
+//============== Annotations ============
+//annotation: AT annotationName call;
 
 //=========== Statements ===============
 statement: block #BlockStmt
@@ -116,5 +128,7 @@ primitives: OBJECT_LABEL    #ObjectType
 //=============== Names ==============================
 variableName: ID;
 functionName: ID;
-qualifiedName : ID (DIVIDE ID)*;
+moduleName: ID;
+annotationName: ID;
+qualifiedName : ID (DOT ID)* (DOT '*')?;
 name : ID;

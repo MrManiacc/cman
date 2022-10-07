@@ -17,15 +17,13 @@ namespace CMan.Lang.Statement.Variable {
             var child = declaration.GetChild(0);
             IExpression expr = new NoOpExpression();
             IType type = SystemType.Null;
-            switch (child)
-            {
+            switch (child) {
                 case CmanParser.AssignmentContext ass:
                     expr = ass.expression().Accept(expressionVisitor);
                     type = expr.GetType();
                     break;
                 case CmanParser.ExplicitTypeSignatureContext sig: {
-                    type = SystemType.Get(sig.type().GetText());
-                    if (type.Equals(SystemType.Null)) type = new UserType(sig.type().GetText());
+                    type = SystemType.Get(sig.type());
                     break;
                 }
                 case CmanParser.ExplicitAssignmentSignatureContext exp: {

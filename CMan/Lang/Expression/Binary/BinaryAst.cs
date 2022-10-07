@@ -1,4 +1,5 @@
-﻿using CMan.Lang.Type;
+﻿using System;
+using CMan.Lang.Type;
 
 namespace CMan.Lang.Expression.Binary {
     public class BinaryAst : IExpression {
@@ -11,10 +12,11 @@ namespace CMan.Lang.Expression.Binary {
             Left = left;
             Right = right;
             Op = op;
+            if (!Equals(Left.GetType().GetTypeName(), Right.GetType().GetTypeName()))
+                throw new InvalidOperationException("Tried to do binary operation between incompatible types!");
         }
 
-        public IType GetType() {
-            throw new System.NotImplementedException();
-        }
+        public new IType GetType()
+            => Left.GetType();
     }
 }

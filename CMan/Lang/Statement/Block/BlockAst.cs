@@ -9,7 +9,7 @@ namespace CMan.Lang.Statement.Block {
         }
 
         public override string ToString() {
-            return $"{nameof(Statements)}: {Statements}";
+            return $"{nameof(Statements)}: {string.Join(", ", Statements)}";
         }
     }
 }
