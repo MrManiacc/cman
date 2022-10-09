@@ -1,0 +1,5 @@
+﻿mod Bar{
+    fn hello(name: string): string{
+        ret "Hello, " + name
+    }
+}

@@ -45,6 +45,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Cman.cs" />
         <Compile Include="Lang\CmanLexer.cs" />
         <Compile Include="Lang\CmanParser.cs" />
         <Compile Include="Lang\CmanParserBaseVisitor.cs" />
@@ -52,6 +53,8 @@
         <Compile Include="Lang\CmanParserVisitor.cs" />
         <Compile Include="Lang\Name\IdentifierVisitor.cs" />
         <Compile Include="Lang\Name\Identifier.cs" />
+        <Compile Include="Lang\Parse\Document.cs" />
+        <Compile Include="Lang\Parse\Workspace.cs" />
         <Compile Include="Lang\Program\Atom\AtomAst.cs" />
         <Compile Include="Lang\Program\Atom\AtomVisitor.cs" />
         <Compile Include="Lang\Program\Atom\Function\FunctionAst.cs" />
@@ -126,7 +129,9 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Examples\Test.cman" />
+      <Content Include="Examples\Fib.cm" />
+      <Content Include="Examples\Foo\Bar.cm" />
+      <Content Include="Examples\Test.cm" />
       <Content Include="Lang\CmanLexer.g4" />
       <Content Include="Lang\CmanParser.g4" />
     </ItemGroup>

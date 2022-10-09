@@ -4,8 +4,21 @@ let test: string[] = {"Test1", "Test2", "Test3"}
 //Declare an implicitly typed string array that used a spread expression to "insert" the test array
 let test2 = {"Test0", ...test, "Test4"}
 
-//Doesn't actually exist but proves the point that we should be able to use the spread syntax to create new things
-assertEquals(test, test2)
+
+fn sizeof(value: any): int {
+    ret 1
+}
+
+fn typeof(value: any): Type {
+    ret value
+}
+
+fn error(message: string) {
+    //TODO print error message
+}
+fn println(message: string) {
+    //TODO print message
+}
 
 /**
  * Assert equals should test the equality between things
@@ -16,6 +29,6 @@ fn assertEquals(var1: any, var2: any) {
     if (type1 != type2) error("Assertion failed for equality between '$type1.typeName' and '$type2.typeName'.")
 }
 
-for(let i = 0l, i < sizeof(test), i++){
-    println(test[i])
+for(let i = 0, i < sizeof(test), i++){
+    //println(test[i])
 }

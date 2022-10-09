@@ -33,6 +33,7 @@ namespace CMan.Lang.Program.Atom.Statement.Variable {
                 null => throw new InvalidOperationException(
                     $"Failed to find symbol named {name} in scope {scope.GetPathToRootScope().JoinScopeNames()}"),
                 VariableAst varAst => new VariableReferenceAst(varAst),
+                VariableSymbol varAst => new VariableReferenceAst(varAst),
                 ModuleAst modAst => new VariableReferenceAst(modAst),
                 _ => throw new InvalidComObjectException(
                     $"Failed to find variable symbol with name {name}. Found type ${variable.GetType().Name} instead.")

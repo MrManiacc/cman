@@ -1,18 +1,18 @@
 ﻿using CMan.Lang.Program.Atom.Statement.Expression;
 using CMan.Lang.Program.Atom.Statement.Variable;
+using CMan.Lang.Scope;
 
 namespace CMan.Lang.Program.Atom.Statement.For {
-    public class ForAst : IStatement {
-        public VariableAst Variable { get; }
-        public IExpression Condition { get; }
-        public IExpression Accumulator { get; }
-        public IStatement Body { get; }
+    public class ForAst : BaseScope, IStatement {
+        public VariableAst Variable { get;  set;}
+        public IExpression Condition { get; set; }
+        public IExpression Accumulator { get;  set; }
+        public IStatement Body { get; set; }
 
-        public ForAst(VariableAst variable, IExpression condition, IExpression accumulator, IStatement body) {
-            Variable = variable;
-            Condition = condition;
-            Accumulator = accumulator;
-            Body = body;
-        }
+  
+
+        #region Overrides of BaseScope
+        public override string GetName() => "for";
+        #endregion
     }
 }

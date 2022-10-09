@@ -1,4 +1,4 @@
-﻿using CMan.Lang.Program.Atom.Statement.Assignment;
+using CMan.Lang.Program.Atom.Statement.Assignment;
 using CMan.Lang.Program.Atom.Statement.Block;
 using CMan.Lang.Program.Atom.Statement.Expression;
 using CMan.Lang.Program.Atom.Statement.For;
@@ -24,7 +24,7 @@ namespace CMan.Lang.Program.Atom.Statement {
             blockVisitor = new BlockVisitor(this);
             returnVisitor = new ReturnVisitor(expressionVisitor);
             ifVisitor = new IfVisitor(this);
-            forVisitor = new ForVisitor(this);
+            forVisitor = new ForVisitor(scope);
         }
 
         #region Overrides of CmanParserBaseVisitor<IStatement>

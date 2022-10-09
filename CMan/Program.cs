@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Antlr4.Runtime;
+using CMan.Lang.Parse;
 using CMan.Lang.Program;
 using CMan.Lang.Util;
 
@@ -23,14 +24,19 @@ namespace CMan {
         ";
 
         public static void Main(string[] args) {
-            var test = new object[] { "test", "test2", 5, 6, "Blah" };
+            // var test = new object[] { "test", "test2", 5, 6, "Blah" };
+            //
+            // var parser = Setup(Script);
+            // var program = BuildAst(parser);
+            // var symbols = program.GetAllSymbols();
+            // Console.WriteLine(symbols.JoinToString());
+            // // var variables = program.Statements.OfType<AssignmentAst>();
+            // Console.WriteLine(program);
+            var workspace = new Workspace(@"C:\Users\jraynor\RiderProjects\CMan\CMan\Examples");
+            // var program = workspace.GetProgram("Test");
+            var fibnoacci = workspace.GetProgram("Fib");
             
-            var parser = Setup(Script);
-            var program = BuildAst(parser);
-            var symbols = program.GetAllSymbols();
-            Console.WriteLine(symbols.JoinToString());
-            // var variables = program.Statements.OfType<AssignmentAst>();
-            Console.WriteLine(program);
+            Console.WriteLine(fibnoacci.ToString());
         }
 
         private static CmanParser Setup(string input) {

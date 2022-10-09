@@ -54,14 +54,15 @@ expression: owner=expression DOT functionName call #FunctionCallExpr
           | valueList #ValueListExpr
           | spread #SpreadExpr
           | value #LiteralExpr
-          | OPEN_PAREN left=expression binaryOperator right=expression CLOSE_PAREN #BinaryExpr
-          | left=expression binaryOperator right=expression #BinaryExpr
-          | OPEN_PAREN left=expression condtionalOperator right=expression CLOSE_PAREN #ConditionalExpr
-          | left=expression condtionalOperator right=expression #ConditionalExpr
           | OPEN_PAREN operator=urnaryOperator expression CLOSE_PAREN #UnaryExpr
           | operator=urnaryOperator expression #UnaryExpr
           | OPEN_PAREN expression operator=urnaryOperator CLOSE_PAREN #UnaryExpr
           | expression operator=urnaryOperator #UnaryExpr
+          | OPEN_PAREN left=expression binaryOperator right=expression CLOSE_PAREN #BinaryExpr
+          | left=expression binaryOperator right=expression #BinaryExpr
+          | OPEN_PAREN left=expression condtionalOperator right=expression CLOSE_PAREN #ConditionalExpr
+          | left=expression condtionalOperator right=expression #ConditionalExpr
+
 ;
 
 call: OPEN_PAREN expressionList? CLOSE_PAREN;

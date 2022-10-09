@@ -1,15 +1,16 @@
 ﻿using CMan.Lang.Program.Atom.Statement.Expression;
 using CMan.Lang.Program.Atom.Statement.Variable;
+using CMan.Lang.Scope;
 
 namespace CMan.Lang.Program.Atom.Statement.For {
-    public class ForVisitor : CmanParserBaseVisitor<ForAst> {
-        private readonly StatementVisitor statementVisitor;
-
-        public ForVisitor(StatementVisitor statementVisitor) {
-            this.statementVisitor = statementVisitor;
-        }
+    public class ForVisitor : CmanParserScopedVisitor<ForAst> {
+        public ForVisitor(IScope scope) : base(scope) { }
 
         public override ForAst VisitForStmt(CmanParser.ForStmtContext context) {
+            var forAst = new ForAst();
+            forAst.SetParentScope(Scope);
+            Scope.Nest(forAst);
+            var statementVisitor = new StatementVisitor(forAst);
             var variable = context.@for().variable().Accept(statementVisitor);
             if (!(variable is VariableAst var)) return base.VisitForStmt(context);
             var condition = context.@for().condition.Accept(statementVisitor);
@@ -17,7 +18,11 @@ namespace CMan.Lang.Program.Atom.Statement.For {
             var accumulator = context.@for().advancement.Accept(statementVisitor);
             if (!(accumulator is IExpression accum)) return base.VisitForStmt(context);
             var body = context.@for().statement().Accept(statementVisitor);
-            return new ForAst(var, cond, accum, body);
+            forAst.Variable = var;
+            forAst.Condition = cond;
+            forAst.Accumulator = accum;
+            forAst.Body = body;
+            return forAst;
         }
     }
 }
