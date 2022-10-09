@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Linq;
-using CMan.Lang.Function;
-using CMan.Lang.Statement;
+using CMan.Lang.Program.Atom;
 
 namespace CMan.Lang.Program {
-    public class ProgramVisitor : CmanParserBaseVisitor<ProgramAst> {
-        private static readonly StatementVisitor StatementVisitor = new StatementVisitor();
-        private static readonly FunctionVisitor FunctionVisitor = new FunctionVisitor(StatementVisitor);
-
-        public override ProgramAst VisitProgram(CmanParser.ProgramContext context)
-            => new ProgramAst(context.function()
-                    .Select(x => x.Accept(FunctionVisitor)).ToList(),
-                context.statement()
-                    .Select(x => x.Accept(StatementVisitor)).ToList());
+    public class ProgramVisitor : CmanParserScopedVisitor<ProgramAst> {
+        public override ProgramAst VisitProgram(CmanParser.ProgramContext context) {
+            var program = new ProgramAst();
+            var atomVisitor = new AtomVisitor(program);
+            program.Atoms = context.atom()
+                .Select(x => x.Accept(atomVisitor)).ToList();
+            return program;
+        }
     }
 }

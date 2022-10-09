@@ -2,23 +2,35 @@
 using System.Linq;
 using Antlr4.Runtime;
 using CMan.Lang.Program;
-using CMan.Lang.Statement.Assignment;
-using CMan.Lang.Statement.Variable;
+using CMan.Lang.Util;
 
 namespace CMan {
     internal static class Program {
         private const string Script = @"
-            let threshold = 69
-            if(70 > 50){
-                threshold = 5
-            }        
+           let rootTest = 1
+            mod foo {
+                fn testing(): int {
+                    ret 5
+                }
+                
+                mod blah{
+                   let test = (testing() + 5) - rootTest
+                }
+            }  
+            
+           
+
         ";
-        
+
         public static void Main(string[] args) {
+            var test = new object[] { "test", "test2", 5, 6, "Blah" };
+            
             var parser = Setup(Script);
             var program = BuildAst(parser);
+            var symbols = program.GetAllSymbols();
+            Console.WriteLine(symbols.JoinToString());
             // var variables = program.Statements.OfType<AssignmentAst>();
-                Console.WriteLine(program);
+            Console.WriteLine(program);
         }
 
         private static CmanParser Setup(string input) {

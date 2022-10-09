@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Antlr4.Runtime.Misc;
 
 namespace CMan.Lang.Scope {
     public interface IScope {
@@ -58,6 +59,7 @@ namespace CMan.Lang.Scope {
         /// </summary>
         /// <param name="scope">The</param>
         void Nest(IScope scope);
+
         /// <summary>
         /// This will get the outermost scope starting from the current scope by recursively
         /// working up the tree until we can't move to the parent scope anymore.
@@ -65,7 +67,7 @@ namespace CMan.Lang.Scope {
         /// <returns></returns>
         IScope GetRootScope();
 
-            /// <summary>
+        /// <summary>
         /// This will iterate through all of our nested symbols and retrieve any that extend Scoped Symbol
         /// </summary>
         /// <returns>All scoped symbols</returns>
@@ -97,5 +99,7 @@ namespace CMan.Lang.Scope {
         /// </summary>
         /// <returns>All downward-accessible symbols</returns>
         List<ISymbol> GetAllSymbols();
+        
+        
     }
 }

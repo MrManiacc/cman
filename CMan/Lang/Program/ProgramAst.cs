@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
-using CMan.Lang.Function;
-using CMan.Lang.Statement;
+using CMan.Lang.Program.Atom;
+using CMan.Lang.Scope;
 
 namespace CMan.Lang.Program {
-    public class ProgramAst {
-        public List<FunctionAst> Functions { get; }
-        public List<IStatement> Statements { get; }
+    public class ProgramAst : BaseScope {
+        public List<AtomAst> Atoms { get; internal set; }
 
-        public ProgramAst(List<FunctionAst> functions, List<IStatement> statements) {
-            Functions = functions;
-            Statements = statements;
-        }
+        public ProgramAst(List<AtomAst> atoms) =>
+            Atoms = atoms;
 
-        public override string ToString() {
-            return $"{nameof(Functions)}: {string.Join(",", Functions)}, {nameof(Statements)}: {string.Join(",", Statements)}";
-        }
+        public ProgramAst() {}
+        public override string ToString() => $"Atoms: {string.Join(", ", Atoms)}";
+
+        
+        #region Overrides of BaseScope
+        public override string GetName() => "program";
+        #endregion
     }
 }
